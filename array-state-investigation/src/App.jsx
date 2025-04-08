@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import MemberEdit from './MemberEdit';
+import MemberDialog from './MemberDialog';
+import MemberTable from './MemberTable';
 
 let memberList = [
   {id:1, name:"Alice", email:"alice@gmail.com", active:true}, 
@@ -29,6 +28,10 @@ function App() {
 
 
 /*
+This did not work
+NB: make a new array using filter or map
+Do not modify current or members directly
+
       let index = members.findIndex(member => member.id == id);
       setMembers(current => {
         console.log("setMembers()...");
@@ -52,35 +55,27 @@ function App() {
     setMemberToEdit({...member});
 
   }
+
+  const onSave = (updatedMember) => {
+
+    const newList = members.map(
+      member => member.id == updatedMember.id ? updatedMember : member);
+    setMembers(newList);
+    setEditing(false);
+
+  }
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Active</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map(member => (
-            <tr key={member.id}>
-              <td>{member.id}</td>
-              <td>{member.name}</td>
-              <td>{member.email}</td>
-              <td>{member.active ? "Active" : "Inactive"}</td>
-              <td>
-                <button onClick={() => onDeleteClicked(member.id)}>Delete</button>
-                <button onClick={() => onEditClicked(member)}>Edit</button>
-              </td>
-            </tr>))}
-        </tbody>
-      </table>
+      <MemberTable 
+        members={members} 
+        onDelete={onDeleteClicked}
+        onEdit={onEditClicked}/>
+      
       <div>
         {/*<MemberEdit member={memberToEdit}/>*/}
-        { editing && <MemberEdit {...memberToEdit}/>}
+        { editing && <MemberDialog member={memberToEdit} 
+                        onSave={onSave} 
+                        onCancel={()=>setEditing(false)}/>}
       </div>
     </>
   )
