@@ -1,0 +1,57 @@
+{
+    "members":[{
+        "name": "Eimear",
+        "email": "EimearBeemer@audi.com",
+        "active": false,
+        "id": 1035
+      },
+      {
+        "id": 1036,
+        "name": "Grainne",
+        "email": "grainne@fastmail.ie",
+        "active": false
+      },
+      {
+        "id": 1037,
+        "name": "Deirdredddd",
+        "email": "deirdre@dublinhost.net",
+        "active": true
+      },
+      {
+        "id": 1039,
+        "name": "Fionnuala",
+        "email": "fionnuala@shamrockhost.com",
+        "active": true
+      },
+      {
+        "id": 1041,
+        "name": "Caoimhe",
+        "email": "caoimhe@iremail.ie",
+        "active": false
+      }
+    ], 
+    "sales":[{
+        "id": 1000,
+        "product": "paper",
+        "colour": "indigo",
+        "quantity": 52
+      },
+      {
+        "id": 1001,
+        "product": "crayon",
+        "colour": "green",
+        "quantity": 86
+      },
+      {
+        "id": 1002,
+        "product": "paper",
+        "colour": "indigo",
+        "quantity": 74
+      },
+      {
+        "id": 1003,
+        "product": "paint",
+        "colour": "blue",
+        "quantity": 81
+      }]
+}
