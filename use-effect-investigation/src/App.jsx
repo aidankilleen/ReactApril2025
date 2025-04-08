@@ -7,6 +7,37 @@ function App() {
   const [sales, setSales] = useState([]);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState("all");
+  const [count, setCount] = useState(0);
+  const [reset, setReset] = useState(false);
+
+
+  useEffect(()=>{
+
+    setCount(0);
+    let intervalId = setInterval(()=>{
+      console.log(`setInterval() called ${intervalId}`);
+      setCount(current=>current+1);
+    }, 1000);
+
+    return ()=>{
+      console.log(`cleanup ${intervalId}`);
+      clearInterval(intervalId);
+    }
+  }, [reset]);
+
+
+  useEffect(()=>{
+    fetch(`https://api.acodingtutor.com/sales`)
+    .then(res => res.json())
+    .then(data=>{
+      let productList = new Set();
+      for (const item of data) {
+        productList.add(item.product);
+      }
+      setProducts([...productList]);
+      setCurrentProduct(data[0].product);
+    })
+  }, []);
 
   useEffect(()=>{
     fetch(`https://api.acodingtutor.com/sales${currentProduct != 'all' ? `?product=${currentProduct}`: ''}`)
@@ -14,16 +45,6 @@ function App() {
       .then(data => {
         console.log(data);
         setSales(data);
-
-        if (currentProduct == 'all') {
-          let productList = new Set();
-          for (const item of data) {
-            productList.add(item.product);
-          }
-          setProducts([...productList]);
-          
-          setCurrentProduct(data[0].product);
-        }
       })
 
   }, [currentProduct]); // if no depencencies, the hook / effect is run only once
@@ -34,6 +55,7 @@ function App() {
   return (
     <>
       <h1>Use Effect</h1>
+      <div>{count}</div><input type="checkbox" checked={reset} onChange={()=>setReset(current=>!current)}/>{reset?"true":"false"}<br/>
       <select onChange={onProductSelect}>
         {products.map(product=><option key={product}>{product}</option>)}
       </select> {currentProduct}
