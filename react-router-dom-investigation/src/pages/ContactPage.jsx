@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ContactDetails from "../components/ContactDetails";
 
 const ContactPage = () => {
 
@@ -14,6 +15,8 @@ const ContactPage = () => {
             <h2>Contact Us</h2>
 
             <button onClick={goHome}>Go Home</button>
+
+            <ContactDetails/>
         </div>
     )
 }
