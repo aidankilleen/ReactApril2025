@@ -3,6 +3,8 @@ import './App.css'
 
 const AUTH_URL="https://jwt.acodingtutor.com/auth/login";
 const API_URL="https://jwt.acodingtutor.com/users";
+//const API_URL="http://localhost:3000/users";
+//const AUTH_URL="http://localhost:3000/auth/login";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
